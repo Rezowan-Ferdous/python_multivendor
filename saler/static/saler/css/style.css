@@ -32,13 +32,13 @@
 	color: #fff;
 }
 .side_nav a:hover{
-	color: #be2714;
+	color: #7fb0db;
 }
 .a{
 	color: #fff;
 }
 .a:hover{
-	color: #be2714;
+	color: #7fb0db;
 }
 .logo{
     font-size: 28px;
@@ -50,8 +50,8 @@ nav {
 	height: 100%;
 	position: fixed;
 	left: 40px;
-	background-color: #be2714;
-	transition: ;
+	background-color: #7fb0db;
+	transition: .4s;
 	animation-name: nav_animation;
 	animation-duration: .3s;
 	font-family: "Comic Sans MS", cursive, sans-serif;
@@ -68,7 +68,7 @@ nav ul li{
     border-bottom: solid 1px #231f206b;
 }
 nav ul li a{
-	color: #231f20;
+	color: #fff;
 	font-size: 20px;
 }
 
@@ -94,7 +94,7 @@ nav a:hover{
 	border-bottom-right-radius: 150px;
 	position: absolute;
 	left: 40px;
-	background-color: #be2714;
+	background-color: #7fb0db;
 }
 .wallet{
 	transition: all 300ms linear;
@@ -114,7 +114,7 @@ nav a:hover{
 .wallet li{
 	width: 80px;
 	height: 50px;
-	border-left: solid #be2714;
+	border-left: solid #7fb0db;
 	
 }
 

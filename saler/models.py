@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
+from sympy import product
+from .models import *
 
 class SalerDetail(models.Model):
 	SEX_CHOICES = (("Male",'Male'),("Female",'Female'),("Other",'Other'))
@@ -145,8 +147,8 @@ class Product(models.Model):
 				output_size = (1500, 1500)
 				img5.thumbnail(output_size)
 				img5.save(self.image5.path)
-	def __str__(self):
-		return f'{self.product_id}'
+	# def __str__(self):
+	# 	return self.
 
 class ProductSize(models.Model):
 	product = models.ForeignKey(Product,on_delete=models.CASCADE)
@@ -247,3 +249,20 @@ class Orders(models.Model):
 	products = models.CharField(max_length=50)
 	size = models.CharField(max_length=50,default='',null=True)
 	status = models.CharField(max_length=15,choices=STATUS_CHOICES,default='')
+
+# class orderdetails(models.Model):
+# 	order_id=models.ForeignKey(Orders, default='', on_delete=models.CASCADE)
+# 	product_id=models.ForeignKey(Product, default='', on_delete=models.CASCADE)
+
+
+# class ShippingAddress(models.Model):
+	# customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+	# order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+	# address = models.CharField(max_length=200, null=False)
+	# city = models.CharField(max_length=200, null=False)
+	# state = models.CharField(max_length=200, null=False)
+	# zipcode = models.CharField(max_length=200, null=False)
+	# date_added = models.DateTimeField(auto_now_add=True)
+
+	# def __str__(self):
+	# 	return self.address

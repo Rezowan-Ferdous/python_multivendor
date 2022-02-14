@@ -44,6 +44,7 @@
 					<td>{{pr.category}}</td>
 					<td>{{pr.subcategory}}</td>
 					<td>{{pr.price}}</td>
+					<td> <a href="{% url 'update_product' pr.product_id %}"> Edit </a> </td>
 					<form>
 						<input type="text" name="pro_id" value="{{pr.product_id}}" readonly style="display: none;">
 						<td style="text-align: right;"><button type="submit" class="btn" style="margin: 0;padding: 0"><i

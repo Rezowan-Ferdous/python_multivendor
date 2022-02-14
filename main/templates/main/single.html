@@ -101,7 +101,7 @@ li img {
   font-weight: normal; }
 
 .checked, .price span {
-  color: #be2714; }
+  color: #7fb0db; }
 
 .product-title, .rating, .product-description, .price, .vote, .sizes {
   margin-bottom: 15px; }
@@ -192,7 +192,7 @@ $.fn.preload = function() {
 		<div class="card mt-0">
 			<div class="container-fluid">
 				<div class="wrapper row">
-					<div class="preview col-md-4" style="">
+					<div class="preview col-md-5" style="">
 						<div id="gallery">
 							<div class="preview-pic tab-content">
 							  <div class="tab-pane active" style="height: 400px; width: auto; display: flex;"><img src="{{product.image1.url}}"  alt="" id="main-img" style="max-height: 100%; max-width:100%; width: auto; margin: auto" /></div>
@@ -215,15 +215,17 @@ $.fn.preload = function() {
 							</ul>	
 						</div>					
 					</div>
-					<div class="details col-md-5" style="border-left: solid 1px #e2eaef; border-right: solid 1px #e2eaef;">
+					<div class="details col-md-6" style="border-left: solid 1px #e2eaef; border-right: solid 1px #e2eaef;">
 						
 						<h3 class="product-title">{{product.product_name}}</h3>
             <h6> {{product.shop.get_full_name}}</h6>
 
 						<p class="product-description">{{product.desc}}</p>
-						<h4 class="price"><p><span class="item_price"><span><i class="fa fa-inr"
-											aria-hidden="true"></i></span>{{product.price}}</span> <del><i class="fa fa-inr"
-											aria-hidden="true"></i>{{product.price_not}}</del></p></h4>
+						<h4 class="price"><p><span class="item_price"><span>
+              ৳
+                    </i></span>{{product.price}}</span> <del>
+                      ৳
+                      {{product.price_not}}</del></p></h4>
             {% if sizes %}
 						<h5 class="sizes">sizes:
               {% for me in sizes %}
@@ -237,7 +239,7 @@ $.fn.preload = function() {
 						</h5> -->
 						<div class="action">
               <div>
-                    <a p_id="{{product.product_id}}" class="btn btn-primary oprbtn" id="ord{{product.product_id}}">Order Now</a>
+                    <a p_id="{{product.product_id}}" style="color: #fff !important;" class="btn btn-primary oprbtn" id="ord{{product.product_id}}">Order Now</a>
                     <div id="ord{{product.product_id}}sizesof" style="display: none;">
                           <h6>Select any Size for Order Now</h6>
                           {% for me in sizes %}
@@ -248,7 +250,7 @@ $.fn.preload = function() {
                           </form> 
                           {% endfor %}
                         </div>
-                        <a p_id="{{product.product_id}}" class="btn btn-primary oprbtn"  style="padding: 5px 10px 5px 5px;" id="atc{{product.product_id}}">Add to Cart</a>
+                        <a p_id="{{product.product_id}}" class="btn btn-primary oprbtn"  style="padding: 5px 10px 5px 5px; color:#fff !important;" id="atc{{product.product_id}}">Add to Cart</a>
                         <div id="atc{{product.product_id}}sizesof" style="display: none;">
                           <h6>Select any Size for Add To Cart</h6>
                           {% for me in sizes %}
@@ -267,28 +269,29 @@ $.fn.preload = function() {
                   <a prod_id="{{product.product_id}}" class="btn btn-danger pt-1 pb-1 pr-2 pl-2 add_to_cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
               </div>
             {% endif %}				
-					</div>
-          <div class="col-md-3">
+					</div> 
+          <div class="col-md-12 " style="margin-top: 80px;">
             <div class="float-right w-100">
-              <h5 class="product-title float-right">Reviews*</h2>
+              <h5 class="product-title ">Reviews*</h2>
               {% if request.user.is_authenticated %}
                 <form method="post">{% csrf_token %}
                   <div class="input-group mb-3 ">
-                    <input type="text" class="form-control form-control-sm" placeholder="Enter Your Review" aria-label="Enter Your Review" aria-describedby="button-addon2" name="review">
-                    <div class="input-group-append">
-                      <button type="submit" style="border: none;" class="btn-secondary form-control-sm" type="button" id="button-addon2"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                    </div>
+                    <textarea style="height: 150px;" class="form-control" name="review" iaria-label="Enter Your Review">Enter Your Review</textarea>
+                    <!-- <input type="text" class="form-control form-control-sm" placeholder="Enter Your Review" aria-label="Enter Your Review" aria-describedby="button-addon2" name="review"> -->
+                  </div>
+                  <div class="input-group-append float-right">
+                    <button type="submit" style="border: none; width: 80px; height: 40px;" class="btn-secondary form-control-sm" type="button" id="button-addon2"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                   </div>
                 </form>
               {% endif %}
-              <div style="height: 400px; overflow-y: scroll;">
+              <!-- <div style="height: 400px; overflow-y: scroll;">
                 {% for review in product_review %}
                   <div class="bd-callout bd-callout-warning mb-1">
                     <h6 class="m-0 p-0" id="conveying-meaning-to-assistive-technologies">{{review.user.get_full_name}}</h6>
                     <small class="pl-1 text-muted">{{review.review}}</small>
                     </div>
                 {% endfor %}
-              </div>
+              </div> -->
             </div>
           </div>
 				</div>

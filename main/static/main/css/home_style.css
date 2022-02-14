@@ -9,7 +9,7 @@ h2 {
     /*margin: 15px 0 9px;*/
 }
 h2 b {
-    color: #be2714;
+    color: #7fb0db;
 }
 h2::after {
     content: "";
@@ -32,7 +32,7 @@ h2::after {
     overflow: hidden;
 }
 .carousel1 .item .img-box {
-    height: 160px;
+    height: 260px;
     width: 100%;
     position: relative;
 }
@@ -125,25 +125,8 @@ h2::after {
         display: none;
     }
 }
-/*.carousel-indicators li, .carousel-indicators li.active {
-    width: 10px;
-    height: 10px;
-    margin: 4px;
-    border-radius: 50%;
-    border-color: transparent;
-}
-.carousel-indicators li {
-    background: rgba(0, 0, 0, 0.2);
-}
-.carousel-indicators li.active {
-    background: rgba(0, 0, 0, 0.6);
-}
-.star-rating li {
-    padding: 0;
-}
-.star-rating i {
-    font-size: 14px;
-    color: #be2714;
-}
-*/
 
+
+.banner-area{
+    margin-bottom: 80px;
+}

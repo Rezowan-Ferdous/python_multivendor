@@ -313,6 +313,7 @@ def delete_from_cart(request):
 		return HttpResponse("")
 
 MERCHANT_KEY = 'YOUR_MERCHANT_KEY'
+
 @login_required
 def order_now(request):
 	allProds =[]
@@ -338,12 +339,12 @@ def order_now(request):
 					order_id = 'ordr001'
 				product1 = new_prod+'|'+str(1)+','
 				Orders(order_id=order_id,user=request.user,saler=Product.objects.filter(product_id=int(new_prod)).first().shop,products=product1,size=prod_size).save()
-				if int(new_prod) in trends:
-				    t = trend.objects.filter(product = Product.objects.filter(product_id=int(new_prod)).first())[0]
-				    t.number += 1
-				    t.save()
-				else:
-				    trend(product = Product.objects.filter(product_id=int(new_prod)).first(), number=1).save()
+				# if int(new_prod) in trends:
+				#     t = trend.objects.filter(product = Product.objects.filter(product_id=int(new_prod)).first())[0]
+				#     t.number += 1
+				#     t.save()
+				# else:
+				#     trend(product = Product.objects.filter(product_id=int(new_prod)).first(), number=1).save()
 				return redirect('/myorders')
 			else:
 				o_id = ''
@@ -354,12 +355,12 @@ def order_now(request):
 				o_id = order_id
 				product1 = new_prod+'|'+str(1)+','
 				Orders(order_id=order_id,user=request.user,saler=Product.objects.filter(product_id=int(new_prod)).first().shop,products=product1,size=prod_size).save()
-				if int(new_prod) in trends:
-				    t = trend.objects.filter(product = Product.objects.filter(product_id=int(new_prod)).first())[0]
-				    t.number += 1
-				    t.save()
-				else:
-				    trend(product = Product.objects.filter(product_id=int(new_prod)).first(), number=1).save()
+				# if int(new_prod) in trends:
+				    # t = trend.objects.filter(product = Product.objects.filter(product_id=int(new_prod)).first())[0]
+				    # t.number += 1
+				    # t.save()
+				# else:
+				    # trend(product = Product.objects.filter(product_id=int(new_prod)).first(), number=1).save()
 				delev = 0.0
 				subtotal = Product.objects.filter(product_id=int(new_prod)).first().price
 				tax = subtotal*int(Product.objects.filter(product_id=int(new_prod)).first().gst)/100
@@ -380,7 +381,7 @@ def order_now(request):
 				return render(request, 'main/paytm.html', {'param_dict': param_dict})
 
 	else:
-		address_form = UserAddressForm(instance=request.user.userdetail)
+		# address_form = UserAddressForm(instance=request.user.userdetail)
 		u_form2 = UserAddressForm1(instance=request.user)
 	delev = 0.0
 	subtotal = Product.objects.filter(product_id=int(new_prod)).first().price
@@ -395,6 +396,7 @@ def order_now(request):
 			'category':category.objects.all(),
 		}
 	return render(request, 'main/checkout2.html', params)
+
 
 @login_required
 def checkout(request):
@@ -422,12 +424,12 @@ def checkout(request):
 					product1 = item.product_id+'|'+str(item.number)+','
 					Orders(order_id=order_id,user=request.user,saler=Product.objects.filter(product_id=int(item.product_id)).first().shop,products=product1, size=item.product_size).save()
 					item.delete()
-					if int(item.product_id) in trends:
-					    t = trend.objects.filter(product = Product.objects.filter(product_id=int(item.product_id)).first())[0]
-					    t.number += 1
-					    t.save()
-					else:
-					    trend(product = Product.objects.filter(product_id=int(item.product_id)).first(), number=1).save()
+					# if int(item.product_id) in trends:
+					#     t = trend.objects.filter(product = Product.objects.filter(product_id=int(item.product_id)).first())[0]
+					#     t.number += 1
+					#     t.save()
+					# else:
+					#     trend(product = Product.objects.filter(product_id=int(item.product_id)).first(), number=1).save()
 				return redirect('/myorders')
 			else:
 				temp = 1
@@ -450,12 +452,12 @@ def checkout(request):
 			product1 = item.product_id+'|'+str(item.number)+','
 			Orders(order_id=order_id,user=request.user,saler=Product.objects.filter(product_id=int(item.product_id)).first().shop,products=product1, size=item.product_size)
 			
-			if int(item.product_id) in trends:
-			    t = trend.objects.filter(product = Product.objects.filter(product_id=int(item.product_id)).first())[0]
-			    t.number += 1
-			    t.save()
-			else:
-			    trend(product = Product.objects.filter(product_id=int(item.product_id)).first(), number=1)
+			# if int(item.product_id) in trends:
+			#     t = trend.objects.filter(product = Product.objects.filter(product_id=int(item.product_id)).first())[0]
+			#     t.number += 1
+			#     t.save()
+			# else:
+			#     trend(product = Product.objects.filter(product_id=int(item.product_id)).first(), number=1)
 		param_dict = {
 
                 'MID': 'YOUR_MID',
@@ -501,12 +503,12 @@ def handlerequest(request):
 				product1 = item.product_id+'|'+str(item.number)+','
 				Orders(order_id=order_id,user=request.user,saler=Product.objects.filter(product_id=int(item.product_id)).first().shop,products=product1, size=item.product_size).save()
 				item.delete()
-				if int(item.product_id) in trends:
-				    t = trend.objects.filter(product = Product.objects.filter(product_id=int(item.product_id)).first())[0]
-				    t.number += 1
-				    t.save()
-				else:
-					trend(product = Product.objects.filter(product_id=int(item.product_id)).first(), number=1).save()
+				# if int(item.product_id) in trends:
+				#     t = trend.objects.filter(product = Product.objects.filter(product_id=int(item.product_id)).first())[0]
+				#     t.number += 1
+				#     t.save()
+				# else:
+				# 	trend(product = Product.objects.filter(product_id=int(item.product_id)).first(), number=1).save()
 			print('order successful')
 		else:
 			print('order was not successful because' + response_dict['RESPMSG'])

@@ -1,0 +1,123 @@
+{% extends 'main/account_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block body_account %}
+
+<form method="POST">
+  <!-- Security token by Django -->
+  <!-- {% csrf_token %} -->
+
+  <!-- form as paragraph -->
+  {{ obj.desc }}
+  {{ obj.product_name }}
+
+  {{obj.price}}
+
+  <input type="submit" value="Update">
+</form>
+
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+  <div class="row">
+    <div class="col-md">
+      <div class="form-group">
+        <label for="ProductName">Product Name</label>
+        <input type="text" class="form-control" id="ProductName" name="prod_name" placeholder="{{obj.product_name}}" required>
+      </div>
+    </div>
+    
+    <div class="col-md-2">
+        <label for="ProductName">Category</label>
+      <select class="custom-select" name="category" id="id_category">
+        <option selected>-----</option>
+        <!-- {% for sc in subcat %}
+        <option value="{{sc.0.id}}">{{sc.0}}</option>
+        {% endfor %} -->
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label for="ProductName">SubCategory</label>
+      <select class="custom-select" name="subcategory" id="id_subcategory" >
+        <option selected>-----</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label for="ProductName">Price</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa-solid fa-bangladeshi-taka-sign" aria-hidden="true"></i></span>
+        </div>
+        <input type="number" class="form-control" aria-label="" name="price" value="{{obj.price}}" required>
+        
+      </div>
+    </div>
+    <div class="col-md-2">
+      <label for="ProductName">Price Not</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa-solid fa-bangladeshi-taka-sign" aria-hidden="true"></i></span>
+        </div>
+        <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="price_not" required>
+        
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Description</span>
+        </div>
+        <textarea class="form-control" rows="1" aria-label="With textarea" name="desc"></textarea>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">GST</label>
+        </div>
+      <select class="custom-select" id="inputGroupSelect01" name="gst" id="inputGroupSelect01">
+        <option value="0" selected>0%</option>
+        <option value="3">3%</option>
+        <option value="5">5%</option>
+        <option value="12">12%</option>
+        <option value="18">18%</option>
+        <option value="28">28%</option>
+      </select>
+    </div>
+  </div>
+  </div>
+  <label for="ProductName">Images</label>
+  <div class="row">
+    <div class="col-md">
+      <input type="file" name="image1" accept="image/*" class="clearablefileinput form-control" required>
+    </div>
+    <div class="col-md">
+      <input type="file" name="image2" accept="image/*" class="clearablefileinput form-control">
+    </div>
+    <div class="col-md">
+      <input type="file" name="image3" accept="image/*" class="clearablefileinput form-control">
+    </div>
+    <div class="col-md">
+      <input type="file" name="image4" accept="image/*" class="clearablefileinput form-control">
+    </div>
+    <div class="col-md">
+      <input type="file" name="image5" accept="image/*" class="clearablefileinput form-control">
+    </div>
+  </div>
+  <label>Enter Size and Quantity</label>
+  <div class="row pb-1" id="sizes">
+    <div class="col-sm-2">
+      <div class="input-group">
+        <input type="text" aria-label="Size" class="form-control" placeholder="Size" name="size1" >
+        <input type="number" aria-label="Quantity" class="form-control" placeholder="Quantity" name="quantity1" >
+      </div>
+    </div>
+    <input type="number" name="size_no" style="display: none;" id="size_no" value="1">
+    <i class="fa fa-plus-circle pt-1" aria-hidden="true" style="font-size: 30px;" onclick="addsizequn()"id='pls'></i>
+  </div>
+  <button type="submit" class="btn btn-primary"
+    style="background-color: #be2714; border: none; width: 100%;">Add</button>
+</form>
+
+{% endblock body_account %}

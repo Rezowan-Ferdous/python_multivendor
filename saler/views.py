@@ -3,12 +3,17 @@ from django.http import HttpResponse, JsonResponse
 from .models import SalerDetail, Product, ProductSize, SellerSlider, MyCart, WholeSaleProduct, category, Orders, WholeSaleProductOrders
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .forms import SalerRegisterForm, SalerAddressForm, UpdateSalerDetailForm, UpdateSalerAccountDetailForm
+from .forms import ProductFrom, SalerRegisterForm, SalerAddressForm, UpdateSalerDetailForm, UpdateSalerAccountDetailForm
 from main.forms import UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from math import ceil
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+
+
+from django.shortcuts import (get_object_or_404,
+                              render,
+                              HttpResponseRedirect)
 
 #This is view of Index Page of Seller in which we Display Whole Sale Products
 @login_required
@@ -359,6 +364,78 @@ def view_products(request):
 		return render(request, 'saler/view_products.html',params)
 	else:
 		return redirect("/")
+
+
+# #########
+
+def detail_view(request, id):
+    # dictionary for initial data with
+    # field names as keys
+    context ={}
+    # add the dictionary during initialization
+    context["data"] = Product.objects.get(id = id)
+          
+    return render(request, "detail_view.html", context)
+ 
+# update view for details
+def update_product(request, prod_id):
+	context ={}
+	# subcat=[]
+	# for cat in category.objects.all():
+	# 	x = cat.sub_Categories.split(',')
+	# 	x.insert(0, cat)
+	# 	subcat.append(x)
+	# context["subcat"]=subcat
+
+	if request.method=='GET':
+		
+		prod = Product.objects.filter(product_id=prod_id)[0]
+		# obj = get_object_or_404(Product, prod_id)
+		obj = Product.objects.get(product_id=prod_id)
+		print('obj : ', obj.product_name)
+		context["obj"] = obj
+		form = ProductFrom(request.POST or None, instance = obj)
+		print('form ', form)
+		if form.is_valid():
+			context["form"] = form
+			context["obj"] = obj
+		print(context)
+		return render(request, "saler/update_product.html", context)
+	elif request.method=='POST':
+
+		obj = get_object_or_404(Product, prod_id)
+		form = ProductFrom(request.POST or None, instance = obj)
+		if form.is_valid():
+			form.save()
+			return redirect("/seller/view_products/")
+		# context["form"] = form
+		# return render(request, "update_view.html", context)
+	
+    # add form dictionary to context
+  
+    # dictionary for initial data with
+    # field names as keys
+
+	
+    # fetch the object related to passed id
+
+ 
+    # pass the object as instance in form
+    
+ 
+    # save the data from the form and
+    # redirect to detail_view
+    
+    
+ 
+    # add form dictionary to context
+   
+
+
+######
+
+
+
 
 # Signup for Seller
 def seller_signup(request):

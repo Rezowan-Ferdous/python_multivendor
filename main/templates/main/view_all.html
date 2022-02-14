@@ -16,7 +16,7 @@
 	box-shadow: 0 2px 3px rgba(0,0,0,0.2);
 }
 .prod1212 .img-box {
-	height: 120px;
+	height: 210px;
 	margin-bottom: 10px;
 	width: 100%;
 	position: relative;
@@ -67,7 +67,7 @@ h2 {
 	position: relative;
 }
 h2 b {
-	color: #be2714;
+	color: #7fb0db;
 }
 h2::after {
 	content: "";
@@ -76,7 +76,7 @@ h2::after {
 	margin: 0 auto;
 	height: 4px;
 	border-radius: 1px;
-	background: #be2714;
+	background: #7fb0db;
 	left: 0;
 	right: 0;
 	bottom: -5px;
@@ -86,7 +86,7 @@ h2::after {
 	padding: 2px 0;
 }
 .prod1212{
-	width: 190px;
+	width: 270px;
 }
 @media(max-width: 700px){
 	.prod1212{
@@ -106,59 +106,64 @@ h2::after {
 </style>
 {% endblock main_head %}
 {% block main_body %}
-<div class="container-fluid" style="background-color: #e2eaef;">
-		<h2>All <b>{{catg}}</b> Products</h2>
-		<div class="row pt-1" style="justify-content: center;">
-			{% if not product %}
-			<div class="text-center"><img src="{% static 'main/images/no-product-found.png' %}"><h3 class="">Please check the spelling or try searching for something else</h3></div>
-			{% endif %}
-			{% for i in product reversed %}
-			<div class="p-1 prod1212">
-				<a href="{% url 'home' %}product/{{i.0.product_id}}" style="text-decoration: none; color: #231f20">
-				<div class="thumb-wrapper">
-					<div class="img-box">
-						<img src="{{i.0.image1.url}}" class="img-responsive img-fluid" alt="">
-					</div>
-					<div class="thumb-content">
-						<small>{{i.0.product_name}}</small>
-						<p class="item-price"><strike><i class="fa fa-inr"
-														aria-hidden="true"></i>{{i.0.price_not}}</strike> <span><i class="fa fa-inr"
-												aria-hidden="true"></i>{{i.0.price}}</span></p>
+<section style="background-color: #e2eaef;">
 
-						<div>
-							{% if i.1 %}
-							<a p_id="{{i.0.product_id}}" class="btn btn-primary oprbtn" id="ord{{i.0.product_id}}">Order Now</a>
-							<div id="ord{{i.0.product_id}}sizesof" style="display: none;">
-								{% for me in i.1 %}
-								<form method="GET" style="display: inline;" action="/order_now">
-														<input type="text" name="prod_id" value="{{i.0.product_id}}" style="display: none;">
-														<input type="size" name="prod_size" value="{{me.size}}" style="display: none;">
-														<button type="submit" class="btn pt-1 pb-1 pr-2 pl-2">{{me.size}}</button>
-													</form>	
-								{% endfor %}
+	<div class="container" >
+			<h2>All <b>{{catg}}</b> Products</h2>
+			<div class="row pt-1" style="justify-content: center;">
+				{% if not product %}
+				<div class="text-center"><img src="{% static 'main/images/no-product-found.png' %}"><h3 class="">Please check the spelling or try searching for something else</h3></div>
+				{% endif %}
+				{% for i in product reversed %}
+				<div class="p-1 prod1212">
+					<a href="{% url 'home' %}product/{{i.0.product_id}}" style="text-decoration: none; color: #231f20">
+					<div class="thumb-wrapper">
+						<div class="img-box">
+							<img src="{{i.0.image1.url}}" class="img-responsive img-fluid" alt="">
+						</div>
+						<div class="thumb-content">
+							<small>{{i.0.product_name}}</small>
+							<p class="item-price"><strike>
+								৳
+															{{i.0.price_not}}</strike> <span>
+																৳
+													{{i.0.price}}</span></p>
+	
+							<div>
+								{% if i.1 %}
+								<a p_id="{{i.0.product_id}}" class="btn btn-primary oprbtn" id="ord{{i.0.product_id}}">Order Now</a>
+								<div id="ord{{i.0.product_id}}sizesof" style="display: none;">
+									{% for me in i.1 %}
+									<form method="GET" style="display: inline;" action="/order_now">
+															<input type="text" name="prod_id" value="{{i.0.product_id}}" style="display: none;">
+															<input type="size" name="prod_size" value="{{me.size}}" style="display: none;">
+															<button type="submit" class="btn pt-1 pb-1 pr-2 pl-2">{{me.size}}</button>
+														</form>	
+									{% endfor %}
+								</div>
+								<a p_id="{{i.0.product_id}}" class="btn btn-primary oprbtn"  style="padding: 5px 10px 5px 5px;" id="atc{{i.0.product_id}}"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+								<div id="atc{{i.0.product_id}}sizesof" style="display: none;">
+									{% for me in i.1 %}
+									<a prod_id="{{i.0.product_id}}" class="btn pt-1 pb-1 pr-2 pl-2 add_to_cart">{{me.size}}</a>
+									{% endfor %}
+								</div>
+								{% else %}
+												<form method="GET" style="display: inline;" action="/order_now">
+															<input type="text" name="prod_id" value="{{i.0.product_id}}" style="display: none;">
+											
+															<button type="submit" class="btn btn-primary oprbtn">Order Now</button>
+														</form>	
+													<a prod_id="{{i.0.product_id}}" class="btn pt-1 pb-1 pr-2 pl-2 add_to_cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+											{% endif %}
 							</div>
-							<a p_id="{{i.0.product_id}}" class="btn btn-primary oprbtn"  style="padding: 5px 10px 5px 5px;" id="atc{{i.0.product_id}}"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
-							<div id="atc{{i.0.product_id}}sizesof" style="display: none;">
-								{% for me in i.1 %}
-								<a prod_id="{{i.0.product_id}}" class="btn pt-1 pb-1 pr-2 pl-2 add_to_cart">{{me.size}}</a>
-								{% endfor %}
-							</div>
-							{% else %}
-											<form method="GET" style="display: inline;" action="/order_now">
-														<input type="text" name="prod_id" value="{{i.0.product_id}}" style="display: none;">
-										
-														<button type="submit" class="btn btn-primary oprbtn">Order Now</button>
-													</form>	
-												<a prod_id="{{i.0.product_id}}" class="btn pt-1 pb-1 pr-2 pl-2 add_to_cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
-										{% endif %}
 						</div>
 					</div>
+					</a>
 				</div>
-				</a>
+				{% endfor %}
 			</div>
-			{% endfor %}
-		</div>
-</div>
+	</div>
+</section>
 <script type="text/javascript">
 		$('.oprbtn').click(function () {
 			var p_id = $(this).attr("p_id");

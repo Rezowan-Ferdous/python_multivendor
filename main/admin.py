@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import UserDetail, Slider, Contact, Cart
 from saler.models import Product, ProductSize, SalerDetail, category, dow, SellerSlider, MyCart, WholeSaleProduct, Orders, trend,WholeSaleProductOrders
 
-admin.site.site_header = 'Wrappers'
+admin.site.site_header = 'Design Bangladesh '
 
 admin.site.register(UserDetail)
 admin.site.register(Product)

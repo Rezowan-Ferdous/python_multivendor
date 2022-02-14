@@ -60,3 +60,15 @@ class UpdateSalerAccountDetailForm(forms.ModelForm):
 			'account_Number',
 			'ifsc_Code',
 			]
+class ProductFrom(forms.ModelForm):
+	class Meta:
+		model=Product
+		fields = [
+			'product_name',
+			'category',
+			'subcategory',
+			'desc',
+			'price',
+			'image1',
+			]
+
